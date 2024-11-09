@@ -33,7 +33,7 @@ public class ProdutoService {
 
     @Transactional
     public void deletarPorID(Long id) {
-        Produto produto = buscarPorID(id); // Ensures the product exists before deletion
+        Produto produto = buscarPorID(id);
         produtoRepository.delete(produto);
     }
 
@@ -45,7 +45,7 @@ public class ProdutoService {
         }
         produto.setNome(nome);
         produto.setPreco(preco);
-        return produtoRepository.save(produto); // Ensure updated product is saved
+        return produtoRepository.save(produto); 
     }
     
 

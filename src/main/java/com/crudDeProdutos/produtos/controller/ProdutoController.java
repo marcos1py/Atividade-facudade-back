@@ -1,18 +1,13 @@
 package com.crudDeProdutos.produtos.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.crudDeProdutos.produtos.entidades.Produto;
 import com.crudDeProdutos.produtos.response.ApiResponse;
@@ -28,11 +23,26 @@ public class ProdutoController {
     @Autowired
     private final ProdutoService produtoService;
 
+    // Converte um objeto Produto para um HashMap
+    private HashMap<String, Object> produtoToMap(Produto produto) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", produto.getId());
+        map.put("nome", produto.getNome());
+        map.put("preco", produto.getPreco());
+        return map;
+    }
+
     @GetMapping
     public ResponseEntity<?> buscarTodos() {
         try {
             List<Produto> produtos = produtoService.buscarTodos();
-            return ResponseEntity.ok(produtos);
+            List<HashMap<String, Object>> produtosMap = produtos.stream()
+                                                                .map(this::produtoToMap)
+                                                                .collect(Collectors.toList());
+            HashMap<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.OK.value());
+            response.put("produtos", produtosMap);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                  .body(new ApiResponse(500, "Erro interno do servidor", e.getMessage()));
@@ -47,7 +57,10 @@ public class ProdutoController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                      .body(new ApiResponse(404, "Produto não encontrado", "ID: " + id));
             }
-            return ResponseEntity.ok(produto);
+            HashMap<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.OK.value());
+            response.put("produto", produtoToMap(produto));
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                  .body(new ApiResponse(500, "Erro interno do servidor", e.getMessage()));
@@ -62,7 +75,10 @@ public class ProdutoController {
                                      .body(new ApiResponse(400, "Erro na entrada de dados", "Nome e preço são obrigatórios"));
             }
             Produto produtoSalvo = produtoService.salvar(produto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(produtoSalvo);
+            HashMap<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.CREATED.value());
+            response.put("produto", produtoToMap(produtoSalvo));
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                  .body(new ApiResponse(500, "Erro interno do servidor", e.getMessage()));
@@ -73,7 +89,10 @@ public class ProdutoController {
     public ResponseEntity<?> deletarPorID(@PathVariable Long id) {
         try {
             produtoService.deletarPorID(id);
-            return ResponseEntity.ok(new ApiResponse(200, "Produto deletado com sucesso", null));
+            HashMap<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.OK.value());
+            response.put("mensagem", "Produto deletado com sucesso");
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                  .body(new ApiResponse(500, "Erro interno do servidor", e.getMessage()));
@@ -88,7 +107,10 @@ public class ProdutoController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                      .body(new ApiResponse(404, "Produto não encontrado", "ID: " + id));
             }
-            return ResponseEntity.ok(produtoAtualizado);
+            HashMap<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.OK.value());
+            response.put("produto", produtoToMap(produtoAtualizado));
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                  .body(new ApiResponse(500, "Erro interno do servidor", e.getMessage()));
