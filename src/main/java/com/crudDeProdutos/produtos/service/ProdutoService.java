@@ -50,12 +50,9 @@ public class ProdutoService {
     
 
     @Transactional(readOnly = true)
-    public HashMap<String, Produto> buscarTodos() {
+    public List<Produto> buscarTodos() {
         List<Produto> produtos = produtoRepository.findAll();
-        HashMap<String, Produto> map = new HashMap<>();
-        for (Produto produto : produtos) {
-            map.put(produto.getNome(), produto);
-        }
-        return map;
+        return produtos;
     }
+    
 }

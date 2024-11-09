@@ -6,9 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 @Entity
+@Getter
 public class Produto {
 
     @Id
@@ -19,7 +21,7 @@ public class Produto {
     @Column(name = "nome", nullable = false, unique = false, length = 100)
     private String nome;
     @Column(name = "preco", nullable = false, unique = false, length = 100)
-    private float preco;
+    private Float preco;
 
 
 }
