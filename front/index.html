@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Produtos</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+    <header>
+        <h1 id="page-title">CRUD de Produtos</h1>
+    </header>
+
+    <section id="product-form-section">
+        <h2 id="form-title">Adicionar Produto</h2>
+        <form id="product-form">
+            <input type="text" id="product-name" placeholder="Nome do produto" required>
+            <input type="number" id="product-price" placeholder="Preço" step="0.01" required>
+            <button type="submit" id="save-button">Salvar Produto</button>
+        </form>
+    </section>
+
+    <div id="message-container">
+        <p id="message" class="hidden"></p>
+    </div>
+
+    <div id="product-list-container">
+        <section id="product-list-section">
+            <h2>Produtos</h2>
+            <div id="product-list">
+            </div>
+        </section>
+    </div>
+    
+
+    <script src="script.js"></script> 
+
+</body>
+
+</html>

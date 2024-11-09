@@ -1,0 +1,207 @@
+/* CSS para o layout geral */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Estilos para a lista de produtos */
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.product-item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-item span {
+    margin-bottom: 10px;
+}
+
+.product-item button {
+    padding: 8px 12px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.product-item .edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.product-item .delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Estilos para o formulário de edição */
+#product-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+#product-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+#product-form input[type="text"],
+#product-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#product-form #save-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#product-form #save-button:hover {
+    background-color: #45a049;
+}
+
+#form-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilos para mensagens de sucesso ou erro */
+.message {
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.success-message {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.error-message {
+    background-color: #f44336;
+    color: white;
+}
+
+.message.hidden {
+    display: none;
+}
+
+.message:not(.hidden) {
+    display: block;
+}
+
+/* Estilos para o botão "Voltar" */
+#back-button {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+#back-button:hover {
+    background-color: #007B9E;
+}
+/* Centraliza o conteúdo do container */
+#product-list-container {
+    display: flex;
+    justify-content: center;  /* Alinha horizontalmente no centro */
+    align-items: center;      /* Alinha verticalmente no centro */
+    flex-direction: column;   /* Coloca o conteúdo em coluna (se necessário) */
+    margin: 0;
+  
+}
+
+/* Estilos adicionais para a seção de produtos */
+#product-list-section {
+    width: 100%;
+    max-width: 90%;        /* Limita a largura máxima da lista de produtos */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título da seção de produtos */
+#product-list-section h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para a div que contém as mensagens */
+#message-container {
+    max-width: 600px;  /* Largura máxima ajustada */
+    margin: 20px auto; /* Centraliza a div com uma margem em cima e embaixo */
+    padding: 15px;     /* Espaçamento interno para dar um respiro */
+    text-align: center;  /* Centraliza o texto dentro da div */
+}
+
+#message {
+    font-size: 1.2rem;   /* Tamanho da fonte aumentado para boa legibilidade */
+    padding: 10px;
+    border-radius: 4px;  /* Bordas arredondadas para a mensagem */
+    margin: 0;
+}
+
+/* Mensagens de sucesso */
+#message.success {
+    background-color: #d4edda;  /* Fundo verde claro */
+    color: #155724;  /* Texto verde escuro */
+    border: 1px solid #c3e6cb;  /* Borda verde clara */
+}
+
+/* Mensagens de erro */
+#message.error {
+    background-color: #f8d7da;  /* Fundo vermelho claro */
+    color: #721c24;  /* Texto vermelho escuro */
+    border: 1px solid #f5c6cb;  /* Borda vermelho clara */
+}
+
+/* A classe "hidden" vai ocultar a mensagem */
+#message.hidden {
+    display: none;  /* Esconde o elemento */
+}
